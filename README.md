@@ -63,8 +63,8 @@ python train.py
 The models are stored in:
 ```text
 models/
- ├── unet_stft_denoise.pth # STFT-based U-Net (frequency domain)
- └── unet_conv_denoise.pth # Conv1D-based U-Net (time domain)
+ ├── unet_stft_denoise.pth # STFT-based U-Net
+ └── unet_conv_denoise.pth # Conv1D-based U-Net
 ```
 
 
