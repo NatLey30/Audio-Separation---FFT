@@ -24,18 +24,20 @@ The goal is to compare how the explicit Fourier representation (magnitude + phas
 
 ## Repository Structure
 
-│
-├── frontends.py # STFT and Conv1D feature extractors
-├── unet_separator.py # U-Net architecture (encoder–decoder)
-├── model.py # ToggleSeparator: wraps frontend + U-Net
-├── add_noise.py # Adds Gaussian noise at chosen SNR
-├── metrics.py # SI-SDR, SNRi, (optionally LSD/STOI/PESQ)
-├── train_functions.py # Training loop utilities (device-safe)
-├── train.py # Trains STFT and Conv U-Nets (denoising)
-├── main.py # Inference + metrics on a noisy sample
-├── runs/ # Auto-created folders for logs/outputs
-└── models/ # Saved weights (.pth)
-
+```text
+Audio-Separation---FFT/
+ │
+ ├── frontends.py # STFT and Conv1D feature extractors
+ ├── unet_separator.py # U-Net architecture (encoder–decoder)
+ ├── model.py # ToggleSeparator: wraps frontend + U-Net
+ ├── add_noise.py # Adds Gaussian noise at chosen SNR
+ ├── metrics.py # SI-SDR, SNRi, (optionally LSD/STOI/PESQ)
+ ├── train_functions.py # Training loop utilities (device-safe)
+ ├── train.py # Trains STFT and Conv U-Nets (denoising)
+ ├── main.py # Inference + metrics on a noisy sample
+ ├── runs/ # Auto-created folders for logs/outputs
+ └── models/ # Saved weights (.pth)
+```
 
 ---
 
@@ -59,9 +61,12 @@ python train.py
 ```
 
 The models are stored in:
+```text
 models/
  ├── unet_stft_denoise.pth # STFT-based U-Net (frequency domain)
  └── unet_conv_denoise.pth # Conv1D-based U-Net (time domain)
+```
+
 
 ## Evaluation and Inference
 
@@ -72,12 +77,14 @@ python main.py
 ```
 
 Outputs are stored in a timestamped folder:
+```text
 runs/comparison_YYYY-MM-DD_HH-MM-SS/
  ├── input_clean.wav
  ├── input_noisy_5dB.wav
  ├── output_stft.wav
  ├── output_conv.wav
  └── results.txt
+```
 
 ## Example results:
 
