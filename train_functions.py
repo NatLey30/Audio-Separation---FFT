@@ -5,14 +5,17 @@ import numpy as np
 
 def train_one_epoch(model, loader, optimizer, loss_fn, device):
     model.train()
+    model.to(device)
     total_loss = 0.0
     for noisy, clean in loader:
         noisy, clean = noisy.to(device), clean.to(device)
         optimizer.zero_grad()
         print(noisy.shape)
-        out = model(noisy)     # (B,1,T)
-        # Para n_sources=1 → out.shape = (B,1,T)
-        loss = loss_fn(out[:, 0, :], clean)
+        out = model(noisy.to(device))     # (B,1,T)
+        print(out.shape, clean.shape)
+        loss = loss_fn(out[:, 0:1, :], clean)
+
+
         loss.backward()
         optimizer.step()
         total_loss += loss.item()
