@@ -24,7 +24,6 @@ class ToggleSeparator(nn.Module):
         x = x.to(self.device)
 
         if self.mode == "stft":
-            # --- asegúrate de que el frontend esté en el mismo device ---
             self.fe.to(self.device)
             feat, Xc = self.fe(x)
             feat, Xc = feat.to(self.device), Xc.to(self.device)
@@ -35,7 +34,7 @@ class ToggleSeparator(nn.Module):
             M = torch.complex(masks[:, :, 0], masks[:, :, 1])
             Shat = M * X
 
-            Shat = Shat.to(x.device)  # todo en la misma GPU/CPU
+            Shat = Shat.to(x.device)
             outs = [torch.istft(Shat[:, s], n_fft=1024, hop_length=256, length=x.size(-1)) 
                     for s in range(self.n_sources)]
             return torch.stack(outs, dim=1).squeeze(2)
